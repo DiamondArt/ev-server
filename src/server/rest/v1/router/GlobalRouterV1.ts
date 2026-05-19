@@ -14,6 +14,7 @@ import OCPIEndpointRouter from './api/OCPIEndpointRouter';
 import OICPEndpointRouter from './api/OICPEndpointRouter';
 import PricingRouter from './api/PricingRouter';
 import RegistrationTokenRouter from './api/RegistrationTokenRouter';
+import WalletRouter from './api/WalletRouter';
 import SessionHashService from '../service/SessionHashService';
 import SettingRouter from './api/SettingRouter';
 import SiteAreaRouter from './api/SiteAreaRouter';
@@ -77,6 +78,7 @@ export default class GlobalRouterV1 {
         new TenantRouter().buildRoutes(),
         new TransactionRouter().buildRoutes(),
         new UserRouter().buildRoutes(),
+        new WalletRouter().buildRoutes(),
       ]);
   }
 

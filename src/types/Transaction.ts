@@ -75,6 +75,7 @@ export enum StartTransactionErrorCode {
   BILLING_NO_TAX = 'billing_no_tax', // start transaction is not possible - the tax ID is not set or inconsistent
   BILLING_NO_SETTINGS = 'billing_no_settings', // start transaction not possible - billing settings are not set (or partially set)
   BILLING_INCONSISTENT_SETTINGS = 'billing_inconsistent_settings', // start transaction not possible - billing settings are inconsistent
+  BILLING_INSUFFICIENT_WALLET_FUNDS = 'insufficient_wallet_funds', // start transaction not possible - wallet balance below minimum threshold
 }
 
 export default interface Transaction extends AbstractCurrentConsumption, TransactionAuthorizationActions {

@@ -282,6 +282,12 @@ export default class DatabaseUtils {
     }, additionalPipeline);
   }
 
+  public static pushWalletLookupInAggregation(lookupParams: DbLookup, additionalPipeline: Record<string, any>[] = []): void {
+    DatabaseUtils.pushCollectionLookupInAggregation('wallets', {
+      ...lookupParams
+    }, additionalPipeline);
+  }
+
   public static pushArrayFilterInAggregation(aggregation: any[], arrayName: string, filter: Record<string, any>): void {
     // Unwind the array
     aggregation.push({ '$unwind': { path: `$${arrayName}`, preserveNullAndEmptyArrays: true } });

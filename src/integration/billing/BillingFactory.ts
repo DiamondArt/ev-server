@@ -6,6 +6,7 @@ import Logging from '../../utils/Logging';
 import { ServerAction } from '../../types/Server';
 import SettingStorage from '../../storage/mongodb/SettingStorage';
 import StripeBillingIntegration from './stripe/StripeBillingIntegration';
+import WalletBillingIntegration from './wallet/WalletBillingIntegration';
 import Utils from '../../utils/Utils';
 
 const MODULE_NAME = 'BillingFactory';
@@ -22,6 +23,9 @@ export default class BillingFactory {
         switch (settings.type) {
           case BillingSettingsType.STRIPE:
             billingIntegrationImpl = StripeBillingIntegration.getInstance(tenant, settings);
+            break;
+          case BillingSettingsType.WALLET:
+            billingIntegrationImpl = WalletBillingIntegration.getInstance(tenant, settings);
             break;
         }
         return billingIntegrationImpl;

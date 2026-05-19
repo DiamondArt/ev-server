@@ -237,7 +237,8 @@ export interface ConcurRefundSetting extends RefundSetting {
 }
 
 export enum BillingSettingsType {
-  STRIPE = 'stripe'
+  STRIPE = 'stripe',
+  WALLET = 'wallet',
 }
 
 export interface BillingSettings extends Setting {
@@ -245,6 +246,12 @@ export interface BillingSettings extends Setting {
   type: BillingSettingsType;
   billing: BillingSetting;
   stripe?: StripeBillingSetting;
+  wallet?: WalletBillingSetting;
+}
+
+export interface WalletBillingSetting {
+  minimumBalance: number; // Solde minimum requis avant de démarrer une session (en XOF)
+  currency: string;       // 'XOF'
 }
 
 export interface BillingSetting {

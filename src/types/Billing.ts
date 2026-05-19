@@ -228,3 +228,49 @@ export interface BillingPlatformInvoice {
   createdOn: Date;
 }
 
+// ---------------------------------------------------------------------------
+// Wallet types
+// ---------------------------------------------------------------------------
+export interface WalletEntry {
+  id?: string;
+  userID: string;
+  tenantID: string;
+  balance: number;      // Solde en XOF (entier, pas de sous-unité)
+  currency: string;     // 'XOF'
+  lastTopUp?: Date;
+  createdOn?: Date;
+  lastChangedOn?: Date;
+}
+
+export interface WalletTopUpRequest {
+  userID: string;
+  amount: number;       // Montant positif en XOF
+  reference?: string;   // Référence de paiement externe (Mobile Money, etc.)
+}
+
+export enum WalletDeductionStatus {
+  DEDUCTED = 'deducted',
+  INSUFFICIENT_FUNDS = 'insufficient_funds',
+  SKIPPED = 'skipped',
+}
+
+export enum WalletTransactionType {
+  TOP_UP = 'top-up',         // Recharge par admin ou Mobile Money
+  DEDUCTION = 'deduction',   // Débit en fin de session de recharge
+}
+
+export interface WalletTransaction {
+  id?: string;
+  userID: string;
+  tenantID: string;
+  type: WalletTransactionType;
+  amount: number;         // Montant de l'opération (toujours positif)
+  balanceBefore: number;  // Solde avant l'opération
+  balanceAfter: number;   // Solde après l'opération
+  currency: string;       // 'XOF'
+  reference?: string;     // Réf. paiement externe (Wave, Orange Money…)
+  ocppTransactionID?: number; // ID transaction OCPP (pour les déductions)
+  createdOn: Date;
+  createdBy?: string;     // ID de l'admin ayant effectué le top-up
+}
+
