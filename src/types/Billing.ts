@@ -254,3 +254,23 @@ export enum WalletDeductionStatus {
   SKIPPED = 'skipped',
 }
 
+export enum WalletTransactionType {
+  TOP_UP = 'top-up',         // Recharge par admin ou Mobile Money
+  DEDUCTION = 'deduction',   // Débit en fin de session de recharge
+}
+
+export interface WalletTransaction {
+  id?: string;
+  userID: string;
+  tenantID: string;
+  type: WalletTransactionType;
+  amount: number;         // Montant de l'opération (toujours positif)
+  balanceBefore: number;  // Solde avant l'opération
+  balanceAfter: number;   // Solde après l'opération
+  currency: string;       // 'XOF'
+  reference?: string;     // Réf. paiement externe (Wave, Orange Money…)
+  ocppTransactionID?: number; // ID transaction OCPP (pour les déductions)
+  createdOn: Date;
+  createdBy?: string;     // ID de l'admin ayant effectué le top-up
+}
+

@@ -468,6 +468,7 @@ export enum ServerAction {
   BILLING_ACCOUNT_ONBOARD = 'BillingAccountOnboard',
   WALLET_GET_BALANCE = 'WalletGetBalance',
   WALLET_TOP_UP = 'WalletTopUp',
+  WALLET_TRANSACTIONS = 'WalletTransactions',
   BILLING_ACCOUNT = 'BillingAccount',
   BILLING_ACCOUNTS = 'BillingAccounts',
   BILLING_TRANSFERS = 'BillingTransfers',
@@ -736,6 +737,7 @@ export enum RESTServerRoute {
   // WALLET URLs
   REST_WALLET_BALANCE = 'wallet/users/:userID/balance',
   REST_WALLET_TOP_UP = 'wallet/users/:userID/top-up',
+  REST_WALLET_TRANSACTIONS = 'wallet/transactions',
 
   // PRICING URLs for CRUD operations
   REST_PRICING_DEFINITIONS = 'pricing-definitions',

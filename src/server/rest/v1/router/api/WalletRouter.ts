@@ -14,6 +14,7 @@ export default class WalletRouter {
   public buildRoutes(): express.Router {
     this.buildRouteWalletBalance();
     this.buildRouteWalletTopUp();
+    this.buildRouteWalletTransactions();
     return this.router;
   }
 
@@ -34,6 +35,16 @@ export default class WalletRouter {
   protected buildRouteWalletTopUp(): void {
     this.router.post(`/${RESTServerRoute.REST_WALLET_TOP_UP}`, (req: Request, res: Response, next: NextFunction) => {
       void RouterUtils.handleRestServerAction(WalletService.handleWalletTopUp.bind(this), ServerAction.WALLET_TOP_UP, req, res, next);
+    });
+  }
+
+  /**
+   * GET /v1/api/wallet/transactions
+   * Historique des transactions wallet (top-up & déductions) avec filtres
+   */
+  protected buildRouteWalletTransactions(): void {
+    this.router.get(`/${RESTServerRoute.REST_WALLET_TRANSACTIONS}`, (req: Request, res: Response, next: NextFunction) => {
+      void RouterUtils.handleRestServerAction(WalletService.handleGetWalletTransactions.bind(this), ServerAction.WALLET_TRANSACTIONS, req, res, next);
     });
   }
 }
