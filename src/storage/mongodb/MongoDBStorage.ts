@@ -117,6 +117,11 @@ export default class MongoDBStorage {
       { fields: { invoiceID: 1 }, options: { unique: true } },
       { fields: { createdOn: 1 } },
     ]);
+    // Wallets
+    await this.handleIndexesInCollection(tenantID, 'wallets', [
+      { fields: { userID: 1 }, options: { unique: true } },
+      { fields: { balance: 1 } },
+    ]);
     // Logs
     await this.handleIndexesInCollection(tenantID, 'logs', [
       { fields: { timestamp: 1 }, options: { expireAfterSeconds: 14 * 24 * 3600 } },

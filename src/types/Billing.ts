@@ -228,3 +228,29 @@ export interface BillingPlatformInvoice {
   createdOn: Date;
 }
 
+// ---------------------------------------------------------------------------
+// Wallet types
+// ---------------------------------------------------------------------------
+export interface WalletEntry {
+  id?: string;
+  userID: string;
+  tenantID: string;
+  balance: number;      // Solde en XOF (entier, pas de sous-unité)
+  currency: string;     // 'XOF'
+  lastTopUp?: Date;
+  createdOn?: Date;
+  lastChangedOn?: Date;
+}
+
+export interface WalletTopUpRequest {
+  userID: string;
+  amount: number;       // Montant positif en XOF
+  reference?: string;   // Référence de paiement externe (Mobile Money, etc.)
+}
+
+export enum WalletDeductionStatus {
+  DEDUCTED = 'deducted',
+  INSUFFICIENT_FUNDS = 'insufficient_funds',
+  SKIPPED = 'skipped',
+}
+

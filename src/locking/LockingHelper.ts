@@ -240,4 +240,32 @@ export default class LockingHelper {
     return lock;
   }
 
+  // ---------------------------------------------------------------------------
+  // Wallet locks
+  // ---------------------------------------------------------------------------
+
+  /**
+   * Verrou exclusif pour le débit du wallet en fin de session.
+   * Durée : 30 secondes (opération MongoDB locale, rapide).
+   */
+  public static async acquireWalletDeductionLock(tenantID: string, userID: string): Promise<Lock | null> {
+    const lock = LockingManager.createExclusiveLock(tenantID, LockEntity.WALLET, `deduction-${userID}`, 30);
+    if (!(await LockingManager.acquire(lock))) {
+      return null;
+    }
+    return lock;
+  }
+
+  /**
+   * Verrou exclusif pour la recharge du wallet (top-up).
+   * Durée : 10 secondes.
+   */
+  public static async acquireWalletTopUpLock(tenantID: string, userID: string): Promise<Lock | null> {
+    const lock = LockingManager.createExclusiveLock(tenantID, LockEntity.WALLET, `topup-${userID}`, 10);
+    if (!(await LockingManager.acquire(lock))) {
+      return null;
+    }
+    return lock;
+  }
+
 }
