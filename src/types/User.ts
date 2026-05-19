@@ -42,6 +42,8 @@ export default interface User extends CreatedUpdatedProps, UserAuthorizationActi
   };
   technical?: boolean;
   freeAccess?: boolean;
+  walletBalance?: number;   // Solde wallet en XOF (enrichi à la demande)
+  walletCurrency?: string;  // Devise du wallet (ex: 'XOF')
 }
 
 export interface UserMobileData {

@@ -844,6 +844,7 @@ export default class UserService {
         technical: Utils.isBoolean(filteredRequest.Technical) ? filteredRequest.Technical : null,
         freeAccess: Utils.isBoolean(filteredRequest.FreeAccess) ? filteredRequest.FreeAccess : null,
         excludeSiteID: filteredRequest.ExcludeSiteID,
+        withWalletBalance: true,
         ...authorizationUsersFilters.filters
       },
       {

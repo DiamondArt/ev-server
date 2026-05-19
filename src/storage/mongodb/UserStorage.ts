@@ -525,6 +525,7 @@ export default class UserStorage {
         userIDs?: string[]; email?: string; issuer?: boolean; passwordResetHash?: string; roles?: string[];
         statuses?: string[]; withImage?: boolean; billingUserID?: string; notSynchronizedBillingData?: boolean;
         withTestBillingData?: boolean; notifications?: any; noLoginSince?: Date; technical?: boolean; freeAccess?: boolean;
+        withWalletBalance?: boolean;
       },
       dbParams: DbParams, projectFields?: string[]): Promise<DataResult<User>> {
     const startTime = Logging.traceDatabaseRequestStart();
@@ -696,6 +697,24 @@ export default class UserStorage {
     DatabaseUtils.pushRenameDatabaseID(aggregation);
     // Add Created By / Last Changed By
     DatabaseUtils.pushCreatedLastChangedInAggregation(tenant.id, aggregation);
+    // Wallet balance
+    if (params.withWalletBalance) {
+      DatabaseUtils.pushWalletLookupInAggregation({
+        tenantID: tenant.id, aggregation,
+        localField: 'id', foreignField: 'userID',
+        asField: 'wallet', oneToOneCardinality: true, oneToOneCardinalityNotNull: false,
+        projectFields: ['balance', 'currency']
+      });
+      // Aplatir les champs wallet directement sur le document utilisateur
+      aggregation.push({
+        $addFields: {
+          walletBalance: { $ifNull: ['$wallet.balance', 0] },
+          walletCurrency: { $ifNull: ['$wallet.currency', 'XOF'] },
+        }
+      });
+      // Supprimer le sous-document wallet intermédiaire
+      aggregation.push({ $unset: 'wallet' });
+    }
     // Project
     DatabaseUtils.projectFields(aggregation, projectFields);
     // Read DB
