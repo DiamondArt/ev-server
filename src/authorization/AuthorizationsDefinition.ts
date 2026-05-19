@@ -9,7 +9,7 @@ export const AUTHORIZATION_DEFINITION: AuthorizationDefinition = {
         attributes: [
           'id', 'name', 'firstName', 'email', 'role', 'status', 'issuer', 'createdOn', 'createdBy.name', 'createdBy.firstName',
           'lastChangedOn', 'lastChangedBy.name', 'lastChangedBy.firstName', 'eulaAcceptedOn', 'eulaAcceptedVersion', 'locale',
-          'billingData.customerID', 'billingData.lastChangedOn'
+          'billingData.customerID', 'billingData.lastChangedOn', 'walletBalance', 'walletCurrency'
         ],
         condition: {
           Fn: 'custom:dynamicAuthorizations',
@@ -156,7 +156,7 @@ export const AUTHORIZATION_DEFINITION: AuthorizationDefinition = {
         attributes: [
           'id', 'name', 'firstName', 'email', 'role', 'status', 'issuer', 'createdOn', 'createdBy.name', 'createdBy.firstName',
           'lastChangedOn', 'lastChangedBy.name', 'lastChangedBy.firstName', 'eulaAcceptedOn', 'eulaAcceptedVersion', 'locale',
-          'billingData.customerID', 'billingData.lastChangedOn', 'technical', 'freeAccess'
+          'billingData.customerID', 'billingData.lastChangedOn', 'technical', 'freeAccess', 'walletBalance', 'walletCurrency'
         ],
         condition: {
           Fn: 'custom:dynamicAuthorizations',
@@ -2194,7 +2194,7 @@ export const AUTHORIZATION_DEFINITION: AuthorizationDefinition = {
         attributes: [
           'id', 'name', 'firstName', 'email', 'role', 'status', 'issuer', 'createdOn',
           'lastChangedOn', 'eulaAcceptedOn', 'eulaAcceptedVersion', 'locale',
-          'billingData.customerID', 'billingData.lastChangedOn', 'technical'
+          'billingData.customerID', 'billingData.lastChangedOn', 'technical', 'walletBalance', 'walletCurrency'
         ],
       },
       {
@@ -3153,7 +3153,7 @@ export const AUTHORIZATION_DEFINITION: AuthorizationDefinition = {
         attributes: [
           'id', 'name', 'firstName', 'email', 'role', 'status', 'issuer', 'createdOn',
           'lastChangedOn', 'eulaAcceptedOn', 'eulaAcceptedVersion', 'locale',
-          'billingData.customerID', 'billingData.lastChangedOn'
+          'billingData.customerID', 'billingData.lastChangedOn', 'walletBalance', 'walletCurrency'
         ],
       },
       {
